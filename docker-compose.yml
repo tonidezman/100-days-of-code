@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8000:8000"
+    volumes:
+      - ".:/app"
+  postgres:
+    image: postgres:14.5
+    ports:
+      - "5432:5432"
+    volumes:
+      - "./db/data:/var/lib/postgresql/data"
+    environment:
+      - POSTGRES_DB=todos
+      - POSTGRES_USER=tonko
+      - POSTGRES_PASSWORD=strong_password
